@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FiHome, FiUser, FiClipboard, FiInfo } from "react-icons/fi";
+import { FiHome, FiUser, FiClipboard, FiInfo, FiLogOut } from "react-icons/fi";
+import { FcContacts } from "react-icons/fc";
 
 function Navbar() {
   const location = useLocation();
@@ -15,7 +16,7 @@ function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <Link to="/Home" className="text-white flex items-center">
+              <Link to="/Home" className="text-white flex items-center font-extrabold"><FcContacts className="w-7 h-8 mr-1"></FcContacts>
                 <span>Contact System</span>
               </Link>
             </div>
@@ -69,8 +70,10 @@ function Navbar() {
             </div>
           </div>
           <div>
-            <button onClick={DirectLogout} className="ml-4 bg-red-500 text-white font-bold py-2 px-4 rounded">
+            <button onClick={DirectLogout} className="ml-4 bg-red-500 text-white font-bold py-2 px-5 rounded flex items-center"><FiLogOut className="w-5 h-6 mr-2"/>
+            <span>
               Logout
+              </span>
             </button>
           </div>
         </div>
