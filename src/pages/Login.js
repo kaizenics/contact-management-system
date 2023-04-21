@@ -31,7 +31,7 @@ export default function Login() {
         // BACKGROUND 
         <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
             style={{
-                backgroundImage: `url('https://miro.medium.com/v2/resize:fit:1400/1*jYvnAb4cBeDDUNX265oNjA.jpeg')`,
+                backgroundImage: `url('https://wallpaper-house.com/data/out/12/wallpaper2you_519782.jpg')`,
                 backgroundSize: 'cover'
             }}>
             <div className="absolute top-0 left-0 h-full w-full bg-black opacity-30"></div>
@@ -40,13 +40,13 @@ export default function Login() {
                 {/* LOGIN FORM */}
                 <div className="min-h-full md:min-h-full bg-gray-100 flex items-center justify-center py-12 px-1 sm:px-6 lg:px-" style={{ marginTop: '-20', paddingBottom: '80px' }}>
                     <div className="max-w-md mx-auto bg-white rounded-md shadow-md overflow-hidden">
-                        <div className="pt-6 px-6 pb-20 py-2">
+                        <div className="pt-10 px-6 pb-22 py-2">
                             <div className="relative mt-8">
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <img className="h-20 w-20 rounded-full" src="https://cdn1.iconfinder.com/data/icons/professionals-flat-colorful-round-corner/614/1573_-_Call_Center_Agent-512.png" alt="" />
                                 </div>
                             </div>
-                            <h2 className="pt-12 pb-1 text-3xl font-extrabold text-gray-900 text-center">Contact Management System</h2>
+                            <h2 className="pt-12 text-3xl font-extrabold text-gray-900 text-center">Contact Management System</h2>
                         </div>
                         <div class="text-center text-sm">
                             <p>Please Login to Access the Page</p>

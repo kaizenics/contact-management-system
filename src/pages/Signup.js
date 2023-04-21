@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const navigate = useNavigate();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -25,7 +26,7 @@ return (
     // BACKGROUND 
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" 
     style={{ 
-      backgroundImage: `url('https://wallpaperaccess.com/full/1261760.jpg')`, 
+      backgroundImage: `url('https://wallpaper-house.com/data/out/12/wallpaper2you_519782.jpg')`, 
       backgroundSize: 'cover' }}>
       <div className="absolute top-0 left-0 h-full w-full bg-black opacity-50"></div>
       <div className="relative z-10">
@@ -34,13 +35,27 @@ return (
         <div className="min-h-full md:min-h-full bg-gray-100 flex items-center justify-center py-12 px-1 sm:px-6 lg:px-" style={{ marginTop: '-20', paddingBottom: '80px' }}>
           <div className="max-w-md mx-auto bg-white rounded-md shadow-md overflow-hidden">
             <div className="px-6 py-4">
-              <h2 className="text-3xl font-extrabold text-gray-900">Sign up for School Portal</h2>
+              <h2 className="text-3xl font-extrabold text-gray-900">Register for Contact Sys</h2>
             </div>
             <div class="text-center text-sm">
               <p>Enter Name, Email address, and Password to Register</p>
             </div>
             <form className="px-6 py-4 space-y-6">
               <div className="rounded-md shadow-sm -space-y-px">
+              <div>
+                  <label htmlFor="name" className="sr-only">Name</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="name"
+                    autoComplete="name"
+                    required
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
                 <div>
                   <label htmlFor="email-address" className="sr-only">Email address</label>
                   <input
