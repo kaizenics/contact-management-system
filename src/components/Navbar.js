@@ -3,11 +3,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiHome, FiUser, FiClipboard, FiInfo, FiLogOut } from "react-icons/fi";
 import { FcContacts } from "react-icons/fc";
 
-function Navbar() {
+export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const DirectLogout = () => {
-    navigate('/');
+
+  function DirectLogout() {
+    if (window.confirm("Are you sure you want to logout?")) {
+      navigate('/');
+    }
   }
 
   return (
@@ -81,5 +84,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;
