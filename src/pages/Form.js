@@ -85,11 +85,7 @@ function Form() {
                 className="form-input w-full rounded-md border-gray-300"
               />
             </div>
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center self-end"
-            >
-              Save Contact
+            <button type="submit" className="bg-blue-500 transition duration-300 ease-in-out hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center self-end">Save Contact
             </button>
           </form>
         </div>
