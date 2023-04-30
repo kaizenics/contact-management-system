@@ -1,7 +1,58 @@
 import React from "react";
+import { useState } from 'react';
 import Navbar from "../components/Navbar";
 
-function Form() {
+export default function Form() {
+  const [data, setData] = useState({
+    name: '',
+    contact:'',
+    email:'',
+    address:'',
+    profile: '',
+})
+
+async function addContactDataHandler (data) {
+    if(data.name == ''){
+        alert('Please enter Full Name');
+        return
+    }
+    if(data.contact == ''){
+        alert('Please enter Contact Number');
+        return
+    }
+    if(data.email == ''){
+        alert('Please enter Email Address');
+        return
+    }
+    if(data.address == '') {
+      alert('Please enter Address');
+      return
+    }
+    if(data.profile == '') {
+      alert('Please upload your Profile Picture');
+      return
+    }
+    else{
+        try{
+            var headers = {
+                Accept: "application/json",
+                "Content-Type": "application.json"
+            };
+            const url = "http://localhost/apibackend/addContact.php";
+            const res = await fetch(url, {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(data)
+            }).then(response => response.json())
+            .then(response => {
+                alert(response[0].Message)
+            }).catch(error => {
+                console.log(error)
+            })
+        }catch(error){console.log(error)}
+    }
+}
+
   return (
     <>
       <Navbar />
@@ -93,5 +144,3 @@ function Form() {
     </>
   );
 }
-
-export default Form;
