@@ -8,19 +8,44 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  function SignUpHandler(email, password) {
+  async function SignUpHandler() {
     if (email === '' || password === '') {
-      alert('Missing Fields')
-      console.log('blank')
-      setError('Please Input Email and Password!')
-    } else if (email === 'admin' && password === 'admin123' || email === 'user1' && password === '2345' || email === 'user2' && password === '1234') {
-      navigate('/Home')
-      setError('')
+      setError('Please Input Email and Password to Proceed')
     } else {
-      alert('Incorrect Credentials')
-      setError('Incorrect Credentials')
+      try {
+        var headers = {
+          Accept: "application/json",
+          "Content-Type": "application.json"
+        };
+        const url = "http://localhost/apibackend/contactsignup.php";
+        var data = {
+          username: email,
+          password: password,
+        }
+        console.log(data)
+        const res = await fetch(url, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(data)
+        }).then(response => response.json())
+          .then(response => {
+            console.log(response);
+            if (response[0].Message === "Successfully Registered!")
+             {
+              alert("Successfully Registered! You'll be redirected to Login Page");
+              navigate('/');
+            } else {
+              setError(response[0].Message);
+            }
+          }).catch(error => {
+            console.log(error)
+          })                                                                                                                              
+      } catch (err) { 
+        console.log(err) 
+      }
     }
   }
+
 
 return (
     // BACKGROUND 
