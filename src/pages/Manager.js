@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IoAddOutline, IoSearch } from "react-icons/io5";
 import Navbar from "../components/Navbar";
+import Contacts from "../components/Contacts";
 
 function Home() {
   return (
@@ -19,12 +20,7 @@ function Home() {
             Add Contact
           </Link>
         </div>
-        <div className="w-full p-8">
-          <p className="mb-8 text-lg text-gray-700">Add or Search Contacts below</p>
-          <div className="bg-gray-200 shadow-lg rounded-lg p-20 h-auto">
-            {/* Contacts input goes here */}
-          </div>
-        </div>
+       <Contacts/>
     </>
   );
 }
