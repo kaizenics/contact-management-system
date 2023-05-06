@@ -28,7 +28,7 @@ export default function Form() {
       alert('Please enter Address');
       return;
     }
-    if(data.profile === '') {
+    if(data.profile === null) {
       alert('Please upload your Profile Picture');
       return;
     } else {
@@ -38,6 +38,7 @@ export default function Form() {
           "Content-Type": "application.json"
         };
         const url = "http://localhost/apibackend/addContact.php";
+        
         const res = await fetch(url, {
           method: "POST",
           headers: headers,

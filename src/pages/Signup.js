@@ -17,7 +17,7 @@ export default function Login() {
           Accept: "application/json",
           "Content-Type": "application.json"
         };
-        const url = "http://localhost/apibackend/contactsignup.php";
+        const url = "http://localhost/apibackend/log/contactsignup.php";
         var data = {
           username: email,
           password: password,
