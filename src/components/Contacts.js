@@ -13,9 +13,15 @@ export default function Manager() {
     getAllContacts();
   }, []);
 
-  useEffect(() => {
-    console.log(contacts);
-  }, [contacts]);
+  const handleEdit = (contactId) => {
+    // Implement the edit functionality
+    console.log("Edit contact with ID:", contactId);
+  };
+
+  const handleDelete = (contactId) => {
+    // Implement the delete functionality
+    console.log("Delete contact with ID:", contactId);
+  };
 
   return (
     <>
@@ -35,8 +41,10 @@ export default function Manager() {
                   <p className="text-gray-600 mb-2">Address: {cont.contact_address}</p>
                   <div className="mb-6"></div>
                   <div>
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2">Edit</button>
-                    <button className="px-4 py-2 bg-red-500 text-white rounded-md">Delete</button>
+                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2"
+                      onClick={() => handleEdit(cont.contact_id)}>Update</button>
+                    <button className="px-4 py-2 bg-red-500 text-white rounded-md"
+                      onClick={() => handleDelete(cont.contact_id)}>Delete</button>
                   </div>
                 </div>
               </div>
@@ -47,4 +55,5 @@ export default function Manager() {
     </>
   );
 }
+
 

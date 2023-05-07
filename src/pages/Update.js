@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {
   const navigate = useNavigate();
@@ -29,17 +28,13 @@ export default function Form() {
       alert('Please enter Address');
       return;
     }
-    /*if(!data.profile) {
-      alert('Please upload your Profile Picture');
-      return;
-    }*/
     else {
       try {
         var headers = {
           Accept: "application/json",
           "Content-Type": "application.json"
         };
-        const url = "http://localhost/apibackend/crud/addContact.php";
+        const url = "http://localhost/apibackend/crud/updateContact.php";
         
         const res = await fetch(url, {
           method: "POST",
@@ -48,9 +43,7 @@ export default function Form() {
         }).then(response => response.json())
         .then(response => {
           alert(response[0].Message)
-          if (window.confirm("Do you want to Proceed to Contact Manager?")) {
-            navigate('/Manager');
-          }
+          navigate('/Manager');
         }).catch(error => {
           console.log(error);
         });
@@ -60,22 +53,17 @@ export default function Form() {
     }
   }
 
-  /* function handleProfilePictureChange(e) {
-    const file = e.target.files[0];
-    setData({ ...data, profile: file, });
-  } */
 
   return (
     <>
-      <Navbar />
       <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-800">Add Contact</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Update Contact</h2>
           </div>
           <form className="mt-8 space-y-6">
             <div className="rounded-full bg-gray-100 h-32 w-32 mx-auto mb-4">
-             <img className="object-cover rounded-full w-full h-full" src="https://www.citypng.com/public/uploads/preview/png-round-blue-contact-user-profile-icon-11639786938sxvzj5ogua.png"alt="profile"/>
+             <img className="object-cover rounded-full w-full h-full" src="https://www.citypng.com/public/uploads/preview/png-round-blue-contact-user-profile-icon-11639786938sxvzj5ogua.png" alt="profile"/>
             </div>
             <div className="center rounded-md shadow-sm -space-y-px">
               <div className="mb-4">
@@ -149,22 +137,6 @@ export default function Form() {
                   }}
                 ></textarea>
               </div>
-              { /* <div className="pt-4 file:mb-4">
-                <label
-                  htmlFor="profile_picture"
-                  className="block text-gray-700 font-bold mb-2"
-                >
-                  Profile Picture
-                </label>
-                <input
-                  type="file"
-                  id="profile_picture"
-                  name="profile_picture"
-                  accept="image/*"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 focus:z-10 sm:text-sm"
-                  onChange={handleProfilePictureChange}
-                />
-                </div> */ }  
             </div>
             <div className="mt-6">
               <button

@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Manager from "./pages/Manager";
 import Form from "./pages/Form";
 import About from "./pages/About";
+import Update from "./pages/Update";
+import Delete from "./pages/Delete";
 import './index.css';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
         <Route path="/Manager" element={<Manager />} />
         <Route path="/Form" element={<Form />} />
         <Route path="/About" element={<About />} />
+        <Route path="/Update" element={<Update />}/>
+        <Route path="/Delete" element={<Delete />}/>
     </Routes>
    </>
   );
