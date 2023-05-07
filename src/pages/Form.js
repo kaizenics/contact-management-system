@@ -8,7 +8,6 @@ export default function Form() {
     contact:'',
     email:'',
     address:'',
-    profile: '',
   });
 
   async function addContactDataHandler (data) {
@@ -28,16 +27,17 @@ export default function Form() {
       alert('Please enter Address');
       return;
     }
-    if(data.profile === null) {
+    /*if(!data.profile) {
       alert('Please upload your Profile Picture');
       return;
-    } else {
+    }*/
+    else {
       try {
         var headers = {
           Accept: "application/json",
           "Content-Type": "application.json"
         };
-        const url = "http://localhost/apibackend/addContact.php";
+        const url = "http://localhost/apibackend/crud/addContact.php";
         
         const res = await fetch(url, {
           method: "POST",
@@ -55,10 +55,10 @@ export default function Form() {
     }
   }
 
-  function handleProfilePictureChange(e) {
+  /* function handleProfilePictureChange(e) {
     const file = e.target.files[0];
     setData({ ...data, profile: file, });
-  }
+  } */
 
   return (
     <>
@@ -70,7 +70,7 @@ export default function Form() {
           </div>
           <form className="mt-8 space-y-6">
             <div className="rounded-full bg-gray-100 h-32 w-32 mx-auto mb-4">
-             {data.profile && <img className="object-cover rounded-full w-full h-full" src={URL.createObjectURL(data.profile)} alt="profile"/>}
+             <img className="object-cover rounded-full w-full h-full" src="https://www.citypng.com/public/uploads/preview/png-round-blue-contact-user-profile-icon-11639786938sxvzj5ogua.png" alt="profile"/>
             </div>
             <div className="center rounded-md shadow-sm -space-y-px">
               <div className="mb-4">
@@ -144,7 +144,7 @@ export default function Form() {
                   }}
                 ></textarea>
               </div>
-              <div className="pt-4 file:mb-4">
+              { /* <div className="pt-4 file:mb-4">
                 <label
                   htmlFor="profile_picture"
                   className="block text-gray-700 font-bold mb-2"
@@ -159,7 +159,7 @@ export default function Form() {
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 focus:z-10 sm:text-sm"
                   onChange={handleProfilePictureChange}
                 />
-              </div>
+                </div> */ }  
             </div>
             <div className="mt-6">
               <button
