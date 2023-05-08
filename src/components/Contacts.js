@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Manager() {
   const [contacts, setContacts] = useState([]);
@@ -14,12 +15,45 @@ export default function Manager() {
   }, []);
 
   const handleUpdate = (contactId) => {
-    console.log("Update contact with ID:", contactId);
-  };
+  const contact = contacts.find((cont) => cont.contact_id === contactId);
 
-  const handleDelete = (contactId) => {
-    console.log("Delete contact with ID:", contactId);
-  };
+  fetch(`http://localhost/apibackend/crud/updateContact.php`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(contact),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Contact updated successfully:', data);
+      // Perform any necessary actions after successful update
+    })
+    .catch((error) => {
+      console.log('Error updating contact:', error);
+      // Handle the error appropriately
+    });
+};
+
+
+const handleDelete = (contactId) => {
+  fetch("http://localhost/apibackend/crud/deleteContact.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id: contactId }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      if (data[0].Message === "Contact Information Deleted!") {
+        setContacts(contacts.filter(contact => contact.contact_id !== contactId));
+      }
+    })
+    .catch(error => console.log(error));
+};
+
 
   return (
     <>
@@ -39,8 +73,8 @@ export default function Manager() {
                   <p className="text-gray-600 mb-2">Address: {cont.contact_address}</p>
                   <div className="mb-6"></div>
                   <div>
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2"
-                      onClick={() => handleUpdate(cont.contact_id)}>Update</button>
+                    <Link to="/Update" className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2"
+                      onClick={() => handleUpdate(cont.contact_id)}>Update</Link>
                     <button className="px-4 py-2 bg-red-500 text-white rounded-md"
                       onClick={() => handleDelete(cont.contact_id)}>Delete</button>
                   </div>
