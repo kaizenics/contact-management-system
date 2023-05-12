@@ -5,54 +5,40 @@ export default function Manager() {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    async function getAllContacts() {
-      fetch("http://localhost/apibackend/crud/fetchContact.php")
-        .then(response => response.json())
-        .then(data => setContacts(data))
-        .catch(error => console.log(error))
-    }
-    getAllContacts();
+     getAllContacts();
   }, []);
 
-  const handleUpdate = (contactId) => {
-  const contact = contacts.find((cont) => cont.contact_id === contactId);
+  function getAllContacts() {
+    fetch("http://localhost/apibackend/crud/fetchContact.php")
+      .then(response => response.json())
+      .then(data => setContacts(data))
+      .catch(error => console.log(error));
+  }
 
-  fetch(`http://localhost/apibackend/crud/updateContact.php`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(contact),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Contact updated successfully:', data);
-      // Perform any necessary actions after successful update
+  const handleDelete = (contactId) => {
+    const confirmation = window.confirm("Are you sure you want to delete this contact?");
+    if (!confirmation) {
+      return;
+    }
+
+    fetch(`http://localhost/apibackend/crud/deleteContact.php?id=${contactId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .catch((error) => {
-      console.log('Error updating contact:', error);
-      // Handle the error appropriately
-    });
-};
-
-
-const handleDelete = (contactId) => {
-  fetch("http://localhost/apibackend/crud/deleteContact.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ id: contactId }),
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      if (data[0].Message === "Contact Information Deleted!") {
-        setContacts(contacts.filter(contact => contact.contact_id !== contactId));
-      }
-    })
-    .catch(error => console.log(error));
-};
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data.Message === "Contact Information Deleted!") {
+          setContacts(contacts.filter(contact => contact.contact_id !== contactId));
+          window.location.href = '/Manager';
+        }
+      })
+      .catch(error => console.log(error));
+  };
+  
+  
 
 
   return (
@@ -74,9 +60,9 @@ const handleDelete = (contactId) => {
                   <div className="mb-6"></div>
                   <div>
                     <Link to="/Update" className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2"
-                      onClick={() => handleUpdate(cont.contact_id)}>Update</Link>
+                     >Update</Link>
                     <button className="px-4 py-2 bg-red-500 text-white rounded-md"
-                      onClick={() => handleDelete(cont.contact_id)}>Delete</button>
+                      onClick={() => handleDelete(cont.form_id)}>Delete</button>
                   </div>
                 </div>
               </div>
