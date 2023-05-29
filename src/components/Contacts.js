@@ -1,20 +1,7 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Manager() {
-  const [contacts, setContacts] = useState([]);
-
-  useEffect(() => {
-     getAllContacts();
-  }, []);
-
-  function getAllContacts() {
-    fetch("http://localhost/apibackend/crud/fetchContact.php")
-      .then(response => response.json())
-      .then(data => setContacts(data))
-      .catch(error => console.log(error));
-  }
-
+export default function Contacts({ contacts }) {
   const handleDelete = (contactId) => {
     const confirmation = window.confirm("Are you sure you want to delete this contact?");
     if (!confirmation) {
@@ -31,7 +18,6 @@ export default function Manager() {
       .then(data => {
         console.log(data);
         if (data.Message === "Contact Information Deleted!") {
-          setContacts(contacts.filter(contact => contact.contact_id !== contactId));
           window.location.href = '/Manager';
         }
       })
@@ -56,10 +42,15 @@ export default function Manager() {
                   <p className="text-gray-600 mb-2">Address: {cont.contact_address}</p>
                   <div className="mb-6"></div>
                   <div>
-                    <Link to={`/Update?id=${cont.form_id}`} className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2"
-                     >Update</Link>
-                    <button className="px-4 py-2 bg-red-500 text-white rounded-md"
-                      onClick={() => handleDelete(cont.form_id)}>Delete</button>
+                    <Link to={`/Update?id=${cont.form_id}`} className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2">
+                      Update
+                    </Link>
+                    <button
+                      className="px-4 py-2 bg-red-500 text-white rounded-md"
+                      onClick={() => handleDelete(cont.form_id)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>
@@ -70,4 +61,5 @@ export default function Manager() {
     </>
   );
 }
+
 
