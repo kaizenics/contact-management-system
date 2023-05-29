@@ -32,7 +32,7 @@ export default function Manager() {
         console.log(data);
         if (data.Message === "Contact Information Deleted!") {
           setContacts(contacts.filter(contact => contact.contact_id !== contactId));
-          window.location.href = '/';
+          window.location.href = '/Manager';
         }
       })
       .catch(error => console.log(error));
@@ -59,7 +59,7 @@ export default function Manager() {
                   <p className="text-gray-600 mb-2">Address: {cont.contact_address}</p>
                   <div className="mb-6"></div>
                   <div>
-                    <Link to="/Update" className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2"
+                    <Link to={`/Update?id=${cont.form_id}`} className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2"
                      >Update</Link>
                     <button className="px-4 py-2 bg-red-500 text-white rounded-md"
                       onClick={() => handleDelete(cont.form_id)}>Delete</button>

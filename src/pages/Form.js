@@ -28,10 +28,7 @@ export default function Form() {
       alert('Please enter Address');
       return;
     }
-    /*if(!data.profile) {
-      alert('Please upload your Profile Picture');
-      return;
-    }*/
+
     else {
       try {
         var headers = {
@@ -59,10 +56,6 @@ export default function Form() {
     }
   }
 
-  /* function handleProfilePictureChange(e) {
-    const file = e.target.files[0];
-    setData({ ...data, profile: file, });
-  } */
 
   return (
     <>
@@ -147,23 +140,7 @@ export default function Form() {
                     setData({...data, address: e.target.value});
                   }}
                 ></textarea>
-              </div>
-              { /* <div className="pt-4 file:mb-4">
-                <label
-                  htmlFor="profile_picture"
-                  className="block text-gray-700 font-bold mb-2"
-                >
-                  Profile Picture
-                </label>
-                <input
-                  type="file"
-                  id="profile_picture"
-                  name="profile_picture"
-                  accept="image/*"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 focus:z-10 sm:text-sm"
-                  onChange={handleProfilePictureChange}
-                />
-                </div> */ }  
+              </div> 
             </div>
             <div className="mt-6">
               <button

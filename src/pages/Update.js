@@ -1,70 +1,89 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function Update() {
-  const { id } = useParams();
+export default function UpdateForm() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const contactId = new URLSearchParams(location.search).get('id');
 
   const [data, setData] = useState({
+    id: '',
     name: '',
     contact: '',
     email: '',
     address: '',
   });
-  
+
   useEffect(() => {
-    const fetchContactData = async () => {
-      try {
-        const response = await fetch(`http://localhost/apibackend/crud/updateContact.php?id=${id}`);
-        const responseData = await response.json();
+    if (contactId) {
+      fetch(`http://localhost/apibackend/crud/fetchContact.php?id=${contactId}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.length > 0) {
+            const contactData = data[0];
+            setData({
+              id: contactData.form_id,
+              name: contactData.contact_name,
+              contact: contactData.contact_number,
+              email: contactData.contact_email,
+              address: contactData.contact_address,
+            });
+          }
+        })
+        .catch(error => console.log(error));
+    }
+  }, [contactId]);
+
+  async function updateContactDataHandler(data) {
+    if (data.name === '') {
+      alert('Please enter Full Name');
+      return;
+    }
+    if (data.contact === '') {
+      alert('Please enter Contact Number');
+      return;
+    }
+    if (data.email === '') {
+      alert('Please enter Email Address');
+      return;
+    }
+    if (data.address === '') {
+      alert('Please enter Address');
+      return;
+    }
   
-        if (responseData.length > 0) {
-          const contactData = responseData[0];
-          setData({
-            name: contactData.contact_name,
-            contact: contactData.contact_number,
-            email: contactData.contact_email,
-            address: contactData.contact_address,
-          });
-        } else {
-          console.log("Contact not found");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
-    fetchContactData();
-  }, [id]);
-  
-  async function updateContactDataHandler() {
     try {
       const headers = {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       };
-      const url = `http://localhost/apibackend/crud/updateContact.php`;
+      const url = `http://localhost/apibackend/crud/updateContact.php?id=${data.id}`;
   
       const response = await fetch(url, {
         method: 'PUT',
         headers: headers,
-        body: JSON.stringify({
-          id: id, 
-          Name: data.name,
-          Contact: data.contact,
-          Email: data.email,
-          Address: data.address,
-        }),
+        body: JSON.stringify(data),
       });
   
       const responseData = await response.json();
       console.log(responseData);
+  
+      if (response.ok) {
+        alert(responseData[0].Message);
+        if (window.confirm('Do you want to Proceed to Contact Manager?')) {
+          navigate('/Manager');
+        }
+      } else {
+        alert('Failed to update contact information');
+      }
     } catch (error) {
       console.log(error);
+      alert('An error occurred while updating contact information');
     }
   }
   
   
+
 
   return (
     <>
@@ -150,7 +169,7 @@ export default function Update() {
               <button
                 type="button"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
-                onClick={updateContactDataHandler}
+                onClick={() => updateContactDataHandler(data)} 
               >
                 Update Contact
               </button>
