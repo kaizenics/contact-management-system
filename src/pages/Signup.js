@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -66,21 +65,7 @@ return (
               <p>Enter Name, Email address, and Password to Register</p>
             </div>
             <form className="px-6 py-4 space-y-6">
-              <div className="rounded-md shadow-sm -space-y-px">
-              <div>
-                  <label htmlFor="name" className="sr-only">Name</label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="name"
-                    autoComplete="name"
-                    required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
+              <div className="rounded-md shadow-sm -space-y-px">   
                 <div>
                   <label htmlFor="email-address" className="sr-only">Email address</label>
                   <input

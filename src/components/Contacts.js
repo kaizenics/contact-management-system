@@ -38,9 +38,6 @@ export default function Manager() {
       .catch(error => console.log(error));
   };
   
-  
-
-
   return (
     <>
       <div className="w-full p-8">
@@ -73,5 +70,4 @@ export default function Manager() {
     </>
   );
 }
-
 
