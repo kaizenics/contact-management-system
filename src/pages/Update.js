@@ -43,12 +43,18 @@ export default function Update() {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       };
-      const url = `http://localhost/apibackend/crud/updateContact.php?id=${id}`;
+      const url = `http://localhost/apibackend/crud/updateContact.php`;
   
       const response = await fetch(url, {
-        method: 'POST',
+        method: 'PUT',
         headers: headers,
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          id: id, 
+          Name: data.name,
+          Contact: data.contact,
+          Email: data.email,
+          Address: data.address,
+        }),
       });
   
       const responseData = await response.json();
@@ -57,6 +63,7 @@ export default function Update() {
       console.log(error);
     }
   }
+  
   
 
   return (
@@ -101,7 +108,7 @@ export default function Update() {
                   type="tel"
                   id="contact_number"
                   name="contact_number"
-                  className="appearance-none rounded-none relative block w-full px-3                   py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 focus:z-10 sm:text-sm"
                   placeholder="Contact Number"
                   value={data.contact}
                   onChange={(e) => {

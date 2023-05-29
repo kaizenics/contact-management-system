@@ -4,7 +4,7 @@ import { IoAddOutline, IoSearch } from "react-icons/io5";
 import Navbar from "../components/Navbar";
 import Contacts from "../components/Contacts";
 
-function Home() {
+export default function Manager() {
   return (
     <>
       <Navbar /> 
@@ -23,6 +23,4 @@ function Home() {
        <Contacts/>
     </>
   );
-}
-
-export default Home;
+  }

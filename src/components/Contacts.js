@@ -32,7 +32,7 @@ export default function Manager() {
         console.log(data);
         if (data.Message === "Contact Information Deleted!") {
           setContacts(contacts.filter(contact => contact.contact_id !== contactId));
-          window.location.href = '/Manager';
+          window.location.href = '/';
         }
       })
       .catch(error => console.log(error));
