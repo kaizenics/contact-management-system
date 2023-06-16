@@ -1,6 +1,6 @@
 # Basic Contact Management System (ADV102 Final Project)
 
-Web Application that stores User's Contact Information including Name, Contact Number, and Address.
+Web Application that stores User's Contact Information including Name, Contact Number, Email Address, and Location Address.
 
 ## How to Run this App Manually?
 1. Download/Open Visual Studio Code
